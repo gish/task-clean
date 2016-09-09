@@ -32,6 +32,5 @@ describe('price calculator', function(){
       var actual = calculatePrice(userType, productType, price, publishedDate)
       expect(expected).to.equal(actual);
     })
-
- })
+  })
 });
