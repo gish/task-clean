@@ -33,4 +33,24 @@ describe('price calculator', function(){
       expect(expected).to.equal(actual);
     })
   })
+
+  describe('isProductPublishedToday', function(){
+    it('should be true when publish date is today', function(){
+      var input = new Date();
+
+      var expected = true;
+      var actual = isProductPublishedToday(input);
+
+      expect(expected).to.equal(actual);
+    })
+
+    it('should be false when publish date is not today', function(){
+      var input = new Date(1970, 1, 1);
+
+      var expected = false;
+      var actual = isProductPublishedToday(input);
+
+      expect(expected).to.equal(actual);
+    })
+  })
 });

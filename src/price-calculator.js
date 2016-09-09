@@ -4,13 +4,17 @@
 var USERTYPE_NORMAL = 0;
 var USERTYPE_COMPANY = 1;
 
+var isProductPublishedToday = function(publishDate) {
+  return publishDate.toDateString() === new Date().toDateString()
+}
+
 var calculatePrice = function (userType, productType, price, publishedDate) {
 	try	{
 		switch (userType) {
 		case USERTYPE_NORMAL: // normal
 			if (productType == 0) { // new product
 				var enddateDiscount = 0;
-				if (publishedDate.toDateString() == new Date().toDateString()) enddateDiscount = 10;
+				if (isProductPublishedToday(publishedDate)) enddateDiscount = 10;
 
 				return price + 25 - enddateDiscount;
 			} else if (productType == 1) { // old product
@@ -19,7 +23,7 @@ var calculatePrice = function (userType, productType, price, publishedDate) {
 			break;
 		case USERTYPE_COMPANY: // company
 			if (productType == 0) { // new product
-				if (publishedDate.toDateString() === new Date().toDateString()) {
+				if (isProductPublishedToday(publishedDate)) {
 						return price + 25 - 15;// Enddate discount and company discount
 				}
 
