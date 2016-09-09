@@ -11,7 +11,7 @@ var isProductPublishedToday = function(publishDate) {
 var calculatePrice = function (userType, productType, price, publishedDate) {
 	try	{
 		switch (userType) {
-		case USERTYPE_NORMAL: // normal
+		case USERTYPE_NORMAL:
 			if (productType == 0) { // new product
 				var enddateDiscount = 0;
 				if (isProductPublishedToday(publishedDate)) enddateDiscount = 10;
@@ -21,7 +21,7 @@ var calculatePrice = function (userType, productType, price, publishedDate) {
 				return price + 35 - 0;
 			}
 			break;
-		case USERTYPE_COMPANY: // company
+		case USERTYPE_COMPANY:
 			if (productType == 0) { // new product
 				if (isProductPublishedToday(publishedDate)) {
 						return price + 25 - 15;// Enddate discount and company discount
