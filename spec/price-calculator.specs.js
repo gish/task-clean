@@ -53,4 +53,26 @@ describe('price calculator', function(){
       expect(expected).to.equal(actual);
     })
   })
+
+  describe('addAdditionalPrice', function() {
+    it('should add 25 SEK when product is new', function() {
+      var price = 10;
+      var productType = PRODUCTTYPE_NEW;
+
+      var expected = 35;
+      var actual = addAdditionalPrice(price, productType);
+
+      expect(expected).to.equal(actual);
+    })
+
+    it('should add 35 SEK when product is old', function() {
+      var price = 12;
+      var productType = PRODUCTTYPE_OLD;
+
+      var expected = 47;
+      var actual = addAdditionalPrice(price, productType);
+
+      expect(expected).to.equal(actual);
+    })
+  })
 });
