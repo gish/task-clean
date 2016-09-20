@@ -16,7 +16,7 @@ describe('price calculator', function(){
       var price = 1;
       var publishedDate = new Date();
 
-      var expected = price + 25 - 10;
+      var expected = price + 25 - rebate;
       var actual = calculatePrice(userType, productType, price, publishedDate);
       expect(expected).to.equal(actual);
     });
