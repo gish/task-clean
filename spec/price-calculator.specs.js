@@ -75,4 +75,42 @@ describe('price calculator', function(){
       expect(expected).to.equal(actual);
     })
   })
+
+  describe('addRebate', function() {
+    it('should add 10 SEK rebate when new and published today', function() {
+      var price = 14;
+      var userType = undefined;
+      var productType = PRODUCTTYPE_NEW;
+      var publishedDate = new Date();
+
+      var expected = 4;
+      var actual = addRebate(price, userType, productType, publishedDate)
+
+      expect(expected).to.equal(actual);
+    })
+
+    it('should add 5 SEK rebate when company user', function() {
+      var price = 13;
+      var userType = USERTYPE_COMPANY;
+      var productType = undefined;
+      var publishedDate = undefined;
+
+      var expected = 8;
+      var actual = addRebate(price, userType, productType, publishedDate)
+
+      expect(expected).to.equal(actual);
+    })
+
+    it('should add 15 SEK rebate when new, published today and company user', function() {
+      var price = 25;
+      var userType = USERTYPE_COMPANY;
+      var productType = PRODUCTTYPE_NEW;
+      var publishedDate = new Date();
+
+      var expected = 10;
+      var actual = addRebate(price, userType, productType, publishedDate)
+
+      expect(expected).to.equal(actual);
+    })
+  })
 });

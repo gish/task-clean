@@ -19,35 +19,20 @@ var addAdditionalPrice = function(price, productType) {
   return price + additionalPriceByType[productType]
 }
 
+var addRebate = function(price, userType, productType, publishedDate) {
+  if (productType === PRODUCTTYPE_NEW && isProductPublishedToday(publishedDate)) {
+    price = price - 10;
+  }
+
+  if (userType === USERTYPE_COMPANY) {
+    price = price - 5;
+  }
+  return price;
+}
+
 var calculatePrice = function (userType, productType, price, publishedDate) {
-	try	{
-    var price = addAdditionalPrice(price, productType)
+  price = addAdditionalPrice(price, productType);
+  price = addRebate(price, userType, productType, publishedDate);
 
-		switch (userType) {
-		case USERTYPE_NORMAL:
-			if (productType == 0) { // new product
-				var enddateDiscount = 0;
-				if (isProductPublishedToday(publishedDate)) enddateDiscount = 10;
-
-				return price - enddateDiscount;
-			} else if (productType == 1) { // old product
-				return price - 0;
-			}
-			break;
-		case USERTYPE_COMPANY:
-			if (productType == 0) { // new product
-				if (isProductPublishedToday(publishedDate)) {
-						return price - 15;// Enddate discount and company discount
-				}
-
-				return price - 5;// Only company discount
-			} else if (productType == 1) { // old product
-				return price - 5;
-			}
-			break;
-		}
-	}	catch (ex)	{
-			console.log(ex);
-	}
-	return 0;
+  return price;
 }
