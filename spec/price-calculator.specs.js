@@ -18,7 +18,8 @@ describe('price calculator', function(){
 
       var expected = price + 25 - rebate;
       var actual = calculatePrice(userType, productType, price, publishedDate);
-      expect(expected).to.equal(actual);
+
+      expect(actual).to.equal(expected);
     });
 
     it('should add rebate to company users', function(){
@@ -30,7 +31,8 @@ describe('price calculator', function(){
 
       var expected = price + 25 - rebate;
       var actual = calculatePrice(userType, productType, price, publishedDate);
-      expect(expected).to.equal(actual);
+
+      expect(actual).to.equal(expected);
     })
   })
 
@@ -41,7 +43,7 @@ describe('price calculator', function(){
       var expected = true;
       var actual = isProductPublishedToday(input);
 
-      expect(expected).to.equal(actual);
+      expect(actual).to.equal(expected);
     })
 
     it('should be false when publish date is not today', function(){
@@ -50,7 +52,7 @@ describe('price calculator', function(){
       var expected = false;
       var actual = isProductPublishedToday(input);
 
-      expect(expected).to.equal(actual);
+      expect(actual).to.equal(expected);
     })
   })
 
@@ -62,7 +64,7 @@ describe('price calculator', function(){
       var expected = 35;
       var actual = addAdditionalPrice(price, productType);
 
-      expect(expected).to.equal(actual);
+      expect(actual).to.equal(expected);
     })
 
     it('should add 35 SEK when product is old', function() {
@@ -72,7 +74,7 @@ describe('price calculator', function(){
       var expected = 47;
       var actual = addAdditionalPrice(price, productType);
 
-      expect(expected).to.equal(actual);
+      expect(actual).to.equal(expected);
     })
   })
 
@@ -122,7 +124,7 @@ describe('price calculator', function(){
       var expected = 4;
       var actual = addRebate(price, userType, productType, publishedDate)
 
-      expect(expected).to.equal(actual);
+      expect(actual).to.equal(expected);
     })
 
     it('should add 5 SEK rebate when company user', function() {
@@ -134,7 +136,7 @@ describe('price calculator', function(){
       var expected = 8;
       var actual = addRebate(price, userType, productType, publishedDate)
 
-      expect(expected).to.equal(actual);
+      expect(actual).to.equal(expected);
     })
 
     it('should add 15 SEK rebate when new, published today and company user', function() {
@@ -146,7 +148,7 @@ describe('price calculator', function(){
       var expected = 10;
       var actual = addRebate(price, userType, productType, publishedDate)
 
-      expect(expected).to.equal(actual);
+      expect(actual).to.equal(expected);
     })
   })
 });
