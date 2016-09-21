@@ -56,28 +56,6 @@ describe('price calculator', function(){
     })
   })
 
-  describe('addAdditionalPrice', function() {
-    it('should add 25 SEK when product is new', function() {
-      var price = 10;
-      var productType = PRODUCTTYPE_NEW;
-
-      var expected = 35;
-      var actual = addAdditionalPrice(price, productType);
-
-      expect(actual).to.equal(expected);
-    })
-
-    it('should add 35 SEK when product is old', function() {
-      var price = 12;
-      var productType = PRODUCTTYPE_OLD;
-
-      var expected = 47;
-      var actual = addAdditionalPrice(price, productType);
-
-      expect(actual).to.equal(expected);
-    })
-  })
-
   describe('isUserTypeNormal', function() {
     it('should be true when usertype is 0', function() {
       var userType = 0;
@@ -114,39 +92,92 @@ describe('price calculator', function(){
     })
   })
 
-  describe('addRebate', function() {
-    it('should add 10 SEK rebate when new and published today', function() {
-      var price = 14;
+  describe('isProductTypeNew', function() {
+    it('should be true when type is 0', function() {
+      var productType = 0;
+      var expected = true;
+      var actual = isProductTypeNew(productType);
+
+      expect(actual).to.equal(expected);
+    });
+
+    it('should be false when type is 1', function() {
+      var productType = 1;
+      var expected = false;
+      var actual = isUserTypeNormal(productType);
+
+      expect(actual).to.equal(expected);
+    })
+  })
+
+  describe('isProductTypeOld', function() {
+    it('should be true when type is 1', function() {
+      var type = 1;
+      var expected = true;
+      var actual = isProductTypeOld(type);
+
+      expect(actual).to.equal(expected);
+    });
+
+    it('should be false when type is 0', function() {
+      var type = 0;
+      var expected = false;
+      var actual = isProductTypeOld(type);
+
+      expect(actual).to.equal(expected);
+    })
+  })
+
+  describe('getAdditionalPrice', function() {
+    it('should return 25 SEK when product is new', function() {
+      var productType = PRODUCTTYPE_NEW;
+
+      var expected = 25;
+      var actual = getAdditionalPrice(productType);
+
+      expect(actual).to.equal(expected);
+    })
+
+    it('should add 35 SEK when product is old', function() {
+      var productType = PRODUCTTYPE_OLD;
+
+      var expected = 35;
+      var actual = getAdditionalPrice(productType);
+
+      expect(actual).to.equal(expected);
+    })
+  })
+
+  describe('getRebate', function() {
+    it('should return 10 when new and published today', function() {
       var userType = undefined;
       var productType = PRODUCTTYPE_NEW;
       var publishedDate = new Date();
 
-      var expected = 4;
-      var actual = addRebate(price, userType, productType, publishedDate)
+      var expected = 10;
+      var actual = getRebate(userType, productType, publishedDate)
 
       expect(actual).to.equal(expected);
     })
 
-    it('should add 5 SEK rebate when company user', function() {
-      var price = 13;
+    it('should return 5 when company user', function() {
       var userType = USERTYPE_COMPANY;
       var productType = undefined;
       var publishedDate = undefined;
 
-      var expected = 8;
-      var actual = addRebate(price, userType, productType, publishedDate)
+      var expected = 5;
+      var actual = getRebate(userType, productType, publishedDate)
 
       expect(actual).to.equal(expected);
     })
 
-    it('should add 15 SEK rebate when new, published today and company user', function() {
-      var price = 25;
+    it('should 15 when new, published today and company user', function() {
       var userType = USERTYPE_COMPANY;
       var productType = PRODUCTTYPE_NEW;
       var publishedDate = new Date();
 
-      var expected = 10;
-      var actual = addRebate(price, userType, productType, publishedDate)
+      var expected = 15;
+      var actual = getRebate(userType, productType, publishedDate)
 
       expect(actual).to.equal(expected);
     })

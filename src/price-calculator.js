@@ -18,29 +18,38 @@ var isUserTypeCompany = function(userType) {
   return userType === USERTYPE_COMPANY;
 }
 
-var addAdditionalPrice = function(price, productType) {
+var isProductTypeNew = function(productType) {
+  return productType === PRODUCTTYPE_NEW;
+}
+
+var isProductTypeOld = function(productType) {
+  return productType === PRODUCTTYPE_OLD;
+}
+
+var getAdditionalPrice = function(productType) {
   var additionalPriceByType = {
     [PRODUCTTYPE_NEW]: 25,
     [PRODUCTTYPE_OLD]: 35
   }
 
-  return price + additionalPriceByType[productType]
+  return additionalPriceByType[productType]
 }
 
-var addRebate = function(price, userType, productType, publishedDate) {
-  if (productType === PRODUCTTYPE_NEW && isProductPublishedToday(publishedDate)) {
-    price = price - 10;
+var getRebate = function(userType, productType, publishedDate) {
+  var rebate = 0;
+
+  if (isProductTypeNew(productType) && isProductPublishedToday(publishedDate)) {
+    rebate = rebate + 10;
   }
 
   if (isUserTypeCompany(userType)) {
-    price = price - 5;
+    rebate = rebate + 5;
   }
-  return price;
+  return rebate;
 }
 
 var calculatePrice = function (userType, productType, price, publishedDate) {
-  price = addAdditionalPrice(price, productType);
-  price = addRebate(price, userType, productType, publishedDate);
+  price = price + getAdditionalPrice(productType) - getRebate(userType, productType, publishedDate)
 
   return price;
 }
