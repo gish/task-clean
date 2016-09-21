@@ -10,21 +10,13 @@ var isProductPublishedToday = function(publishDate) {
   return publishDate.toDateString() === new Date().toDateString()
 }
 
-var isUserTypeNormal = function(userType) {
-  return userType === USERTYPE_NORMAL;
-}
+var isType = (expectedType) => (givenType) => givenType === expectedType;
 
-var isUserTypeCompany = function(userType) {
-  return userType === USERTYPE_COMPANY;
-}
+var isUserTypeNormal = isType(USERTYPE_NORMAL)
+var isUserTypeCompany  = isType(USERTYPE_COMPANY)
 
-var isProductTypeNew = function(productType) {
-  return productType === PRODUCTTYPE_NEW;
-}
-
-var isProductTypeOld = function(productType) {
-  return productType === PRODUCTTYPE_OLD;
-}
+var isProductTypeNew = isType(PRODUCTTYPE_NEW)
+var isProductTypeOld = isType(PRODUCTTYPE_OLD)
 
 var getAdditionalPrice = function(productType) {
   var additionalPriceByType = {

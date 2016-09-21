@@ -56,6 +56,26 @@ describe('price calculator', function(){
     })
   })
 
+  describe('isType', function() {
+    it('should be true when given is same as expected', function() {
+      var givenType = 'a';
+      var expectedType = 'a';
+      var expected = true;
+
+      var actual = isType(expectedType)(givenType)
+      expect(actual).to.equal(expected)
+    })
+
+    it('should be false when given is not same as expected', function() {
+      var givenType = 1;
+      var expectedType = 0;
+      var expected = false;
+
+      var actual = isType(expectedType)(givenType)
+      expect(actual).to.equal(expected)
+    })
+  })
+
   describe('isUserTypeNormal', function() {
     it('should be true when usertype is 0', function() {
       var userType = 0;
