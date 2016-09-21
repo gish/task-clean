@@ -76,6 +76,42 @@ describe('price calculator', function(){
     })
   })
 
+  describe('isUserTypeNormal', function() {
+    it('should be true when usertype is 0', function() {
+      var userType = 0;
+      var expected = true;
+      var actual = isUserTypeNormal(userType);
+
+      expect(actual).to.equal(expected);
+    });
+
+    it('should be false when usertype is 1', function() {
+      var userType = 1;
+      var expected = false;
+      var actual = isUserTypeNormal(userType);
+
+      expect(actual).to.equal(expected);
+    })
+  })
+
+  describe('isUserTypeCompany', function() {
+    it('should be true when usertype is 1', function() {
+      var userType = 1;
+      var expected = true;
+      var actual = isUserTypeCompany(userType);
+
+      expect(actual).to.equal(expected);
+    });
+
+    it('should be false when usertype is 0', function() {
+      var userType = 0;
+      var expected = false;
+      var actual = isUserTypeCompany(userType);
+
+      expect(actual).to.equal(expected);
+    })
+  })
+
   describe('addRebate', function() {
     it('should add 10 SEK rebate when new and published today', function() {
       var price = 14;

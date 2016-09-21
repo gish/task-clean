@@ -10,6 +10,14 @@ var isProductPublishedToday = function(publishDate) {
   return publishDate.toDateString() === new Date().toDateString()
 }
 
+var isUserTypeNormal = function(userType) {
+  return userType === USERTYPE_NORMAL;
+}
+
+var isUserTypeCompany = function(userType) {
+  return userType === USERTYPE_COMPANY;
+}
+
 var addAdditionalPrice = function(price, productType) {
   var additionalPriceByType = {
     [PRODUCTTYPE_NEW]: 25,
@@ -24,7 +32,7 @@ var addRebate = function(price, userType, productType, publishedDate) {
     price = price - 10;
   }
 
-  if (userType === USERTYPE_COMPANY) {
+  if (isUserTypeCompany(userType)) {
     price = price - 5;
   }
   return price;
