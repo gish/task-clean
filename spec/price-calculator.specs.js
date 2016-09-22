@@ -56,6 +56,28 @@ describe('price calculator', function(){
     })
   })
 
+  describe('isEqual', function() {
+    it('should be true when a is b', function() {
+      var a = 'foo';
+      var b = 'foo';
+      var expected = true;
+
+      var actual = isEqual(a)(b);
+
+      expect(actual).to.equal(expected);
+    })
+
+    it('should be false when a is not b', function() {
+      var a = 'foo';
+      var b = 'bar';
+      var expected = false;
+
+      var actual = isEqual(a)(b);
+
+      expect(actual).to.equal(expected);
+    })
+  })
+
   describe('isType', function() {
     it('should be true when given is same as expected', function() {
       var givenType = 'a';

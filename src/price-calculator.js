@@ -6,11 +6,11 @@ var USERTYPE_COMPANY = 1;
 var PRODUCTTYPE_NEW = 0;
 var PRODUCTTYPE_OLD = 1;
 
-var isProductPublishedToday = function(publishDate) {
-  return publishDate.toDateString() === new Date().toDateString()
-}
+var isEqual = (expected) => (given) => expected === given;
 
-var isType = (expectedType) => (givenType) => givenType === expectedType;
+var isProductPublishedToday = (publishDate) => isEqual(new Date().toDateString())(publishDate.toDateString())
+
+var isType = (expectedType) => isEqual(expectedType)
 
 var isUserTypeNormal = isType(USERTYPE_NORMAL)
 var isUserTypeCompany  = isType(USERTYPE_COMPANY)
